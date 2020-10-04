@@ -1,55 +1,4 @@
-> 关于 JavaGuide 的相关介绍请看：[《从编程小白到做了一个接近 90k 点赞的一个国产 Java 开源项目》](https://www.yuque.com/snailclimb/dr6cvl/mr44yt#vu3ok)
->
-> 准备面试的小伙伴可以考虑面试专版：[《Java 面试进阶指南》](https://xiaozhuanlan.com/javainterview?rel=javaguide) ，欢迎加入[我的星球](https://wx.zsxq.com/dweb2/index/group/48418884588288)获取更多实用干货。
->
-> 阿里云最近在做活动，服务器不到 10 元/月，小伙伴们搭建一个网站提高简历质量。支持国内开源做的比较好的公司！[点击此链接直达活动首页。](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=hf47liqn)
->
-> 项目的发展离不开你的支持，如果 JavaGuide 帮助到了你找到自己满意的 offer，那就[请作者喝杯咖啡吧](https://www.yuque.com/snailclimb/dr6cvl/mr44yt#vu3ok)☕！我会继续将项目完善下去！加油！
-
-如果 Github 访问速度比较慢或者图片无法刷新出来的话，可以转移到[码云](https://gitee.com/SnailClimb/JavaGuide)查看，或者[在线阅读](https://snailclimb.gitee.io/javaguide)。**如果你要提交 issue 或者 pr 的话请到 [Github](https://github.com/Snailclimb/JavaGuide) 提交。**
-
-《JavaGuide 面试突击版》PDF 版本+3 本 PDF Java 学习手册，在公众号 **[JavaGuide](#公众号)** 后台回复“**面试突击**”即可获取。
-
-如要进群或者请教问题，请[联系我](#联系我) （备注来自 Github。请直入问题，工作时间不回复）。
-
-**开始阅读之前必看** ：[完结撒花！JavaGuide 面试突击版来啦！](./docs/javaguide面试突击版.md) 。
-
-<p align="center">
-<a href="https://github.com/Snailclimb/JavaGuide" target="_blank">
-	<img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-3/logo - 副本.png" width=""/>
-</a>
-</p>
-
-<p align="center">
-  <a href="https://snailclimb.gitee.io/javaguide"><img src="https://img.shields.io/badge/阅读-read-brightgreen.svg" alt="阅读"></a>
-  <a href="#公众号"><img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-JavaGuide-lightgrey.svg" alt="公众号"></a>
-  <a href="#公众号"><img src="https://img.shields.io/badge/PDF-Java面试突击-important.svg" alt="公众号"></a>
-  <a href="#投稿"><img src="https://img.shields.io/badge/support-投稿-critical.svg" alt="投稿"></a>
-  <a href="https://xiaozhuanlan.com/javainterview?rel=javaguide"><img src="https://img.shields.io/badge/Java-面试指南-important" alt="投稿"></a>
-</p>
-
-<h3 align="center">Sponsor</h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://mp.weixin.qq.com/s/li9_YXNVxan6Qgt3Q9FYqA">
-          <img src="./media/sponsor/wangyi.png" style="margin: 0 auto;width:450px" /></a>
-      </td>
-      <td align="center" valign="middle">
-        <a href="https://t.1yb.co/5p8J">
-          <img src="./media/sponsor/xiangxue.png" style="margin: 0 auto;width:450px" /></a>
-      </td>          
-    </tr>
-    <tr>
-      <td align="center" valign="middle">
-        <a href="https://w.url.cn/s/AS6JeXA">
-          <img src="./media/sponsor/kaikeba.png" style="margin: 0 auto;width:450px" /></a>
-      </td>        
-    </tr>
-  </tbody>
-</table>
+ 
 
 ## 目录
 
@@ -335,39 +284,13 @@ SSO(Single Sign On)即单点登录说的是用户登陆多个子系统的其中�
 1. [【入门】ZooKeeper 相关概念总结 01](docs/system-design/framework/zookeeper/zookeeper-intro.md)
 2. [【进阶】ZooKeeper 相关概念总结 02](docs/system-design/framework/zookeeper/zookeeper-plus.md)
 3. [【实战】ZooKeeper 实战](docs/system-design/framework/zookeeper/zookeeper-in-action.md)
-
-#### 其他
-
-- 接口幂等性（代办）：分布式系统必须要考虑接口的幂等性。
+ 
 
 #### 数据库扩展
 
 读写分离、分库分表。
 
-代办.....
-
-### 大型网站架构
-
-- [8 张图读懂大型网站技术架构](docs/system-design/website-architecture/8%20张图读懂大型网站技术架构.md)
-- [关于大型网站系统架构你不得不懂的 10 个问题](docs/system-design/website-architecture/关于大型网站系统架构你不得不懂的10个问题.md)
-
-#### 性能测试
-
-- [后端程序员也要懂的性能测试知识](https://articles.zsxq.com/id_lwl39teglv3d.html) （知识星球）
-
-#### 高并发
-
-待办......
-
-#### 高可用
-
-高可用描述的是一个系统在大部分时间都是可用的，可以为我们提供服务的。高可用代表系统即使在发生硬件故障或者系统升级的时候，服务仍然是可用的 。相关阅读： **《[如何设计一个高可用系统？要考虑哪些地方？](docs/system-design/website-architecture/如何设计一个高可用系统？要考虑哪些地方？.md)》** 。
-
-### 微服务
-
-#### Spring Cloud
-
-- [ 大白话入门 Spring Cloud](docs/system-design/micro-service/spring-cloud.md)
+ 
 
 ## 必会工具
 
@@ -379,135 +302,4 @@ SSO(Single Sign On)即单点登录说的是用户登陆多个子系统的其中�
 
 1. [Docker 基本概念解读](docs/tools/Docker.md)
 2. [一文搞懂 Docker 镜像的常用操作！](docs/tools/Docker-Image.md)
-
-### 其他
-
-- [【原创】如何使用云服务器？希望这篇文章能够对你有帮助！](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485738&idx=1&sn=f97e91a50e444944076c30b0717b303a&chksm=cea246e1f9d5cff73faf6a778b147ea85162d1f3ed55ca90473c6ebae1e2c4d13e89282aeb24&token=406194678&lang=zh_CN#rd)
-
-## 面试指南
-
-> 这部分很多内容比如大厂面经、真实面经分析被移除，详见[完结撒花！JavaGuide 面试突击版来啦！](./docs/javaguide面试突击版.md)。
-
-1. **[【备战面试 1】程序员的简历就该这样写](docs/essential-content-for-interview/PreparingForInterview/程序员的简历之道.md)**
-2. **[【备战面试 2】初出茅庐的程序员该如何准备面试？](docs/essential-content-for-interview/PreparingForInterview/interviewPrepare.md)**
-3. **[【备战面试 3】7 个大部分程序员在面试前很关心的问题](docs/essential-content-for-interview/PreparingForInterview/JavaProgrammerNeedKnow.md)**
-4. **[【备战面试 4】Github 上开源的 Java 面试/学习相关的仓库推荐](docs/essential-content-for-interview/PreparingForInterview/JavaInterviewLibrary.md)**
-5. **[【备战面试 5】如果面试官问你“你有什么问题问我吗？”时，你该如何回答](docs/essential-content-for-interview/PreparingForInterview/面试官-你有什么问题要问我.md)**
-6. [【备战面试 6】应届生面试最爱问的几道 Java 基础问题](docs/essential-content-for-interview/PreparingForInterview/应届生面试最爱问的几道Java基础问题.md)
-7. **[【备战面试 6】美团面试常见问题总结(附详解答案)](docs/essential-content-for-interview/PreparingForInterview/美团面试常见问题总结.md)**
-
-## Java 学习常见问题汇总
-
-1. [Java 学习路线和方法推荐](docs/questions/java-learning-path-and-methods.md)
-2. [Java 培训四个月能学会吗？](docs/questions/java-training-4-month.md)
-3. [新手学习 Java，有哪些 Java 相关的博客，专栏，和技术学习网站推荐？](docs/questions/java-learning-website-blog.md)
-4. [Java 还是大数据，你需要了解这些东西！](docs/questions/java-big-data.md)
-
-## 资源
-
-### Java 程序员必备书单
-
-1. [「基础篇」Guide 的 Java 后端书架来啦！都是 Java 程序员必看的书籍？](./docs/books/java基础篇.md)
-
-### 实战项目推荐
-
-- **[Java、SpringBoot 实战项目推荐](https://github.com/Snailclimb/awesome-java#实战项目)**
-
-### Github
-
-- [Github 上非常棒的 Java 开源项目集合](https://github.com/Snailclimb/awesome-java)
-- [Github 上 Star 数最多的 10 个项目，看完之后很意外!](docs/tools/github/github-star-ranking.md)
-- [年末将至，值得你关注的 16 个 Java 开源项目！](docs/github-trending/2019-12.md)
-- [Java 项目历史月榜单](docs/github-trending/JavaGithubTrending.md)
-
----
-
-## 待办
-
-- [x] Netty 总结
-- [ ] 数据结构总结重构(---正在进行中---)
-
-## 说明
-
-开源项目在于大家的参与，这才使得它的价值得到提升。感谢 🙏 有你！
-
-项目的 Markdown 格式参考：[Github Markdown 格式](https://guides.github.com/features/mastering-markdown/)，表情素材来自：[EMOJI CHEAT SHEET](https://www.webpagefx.com/tools/emoji-cheat-sheet/)。
-
-利用 docsify 生成文档部署在 Github pages: [docsify 官网介绍](https://docsify.js.org/#/) ，另见[《Guide 哥手把手教你搭建一个文档类型的网站!免费且高速！》](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247486555&idx=2&sn=8486026ee9f9ba645ff0363df6036184&chksm=cea24390f9d5ca86ff4177c0aca5e719de17dc89e918212513ee661dd56f17ca8269f4a6e303&token=298703358&lang=zh_CN#rd) 。
-
-Logo 下的小图标是使用[Shields.IO](https://shields.io/) 生成的。
-
-## 联系我
-
-![个人微信](https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images/2020-08/wechat3.jpeg)
-
-## 捐赠支持
-
-项目的发展离不开你的支持，如果 JavaGuide 帮助到了你找到自己满意的 offer，请作者喝杯咖啡吧 ☕ 后续会继续完善更新！加油！
-
-[点击捐赠支持作者](https://www.yuque.com/snailclimb/dr6cvl/mr44yt#vu3ok)
-
-## Contributor
-
-下面是笔主收集的一些对本仓库提过有价值的 pr 或者 issue 的朋友，人数较多，如果你也对本仓库提过不错的 pr 或者 issue 的话，你可以加我的微信与我联系。下面的排名不分先后！
-
-<a href="https://github.com/LiWenGu">
-    <img src="https://avatars0.githubusercontent.com/u/15909210?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/fanofxiaofeng">
-    <img src="https://avatars0.githubusercontent.com/u/3983683?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/fanchenggang">  
-    <img src="https://avatars2.githubusercontent.com/u/8225921?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/Rustin-Liu">  
-    <img src="https://avatars2.githubusercontent.com/u/29879298?s=400&v=4" width="45px">
-</a>
-
-<a href="https://github.com/ipofss">
-    <img src="https://avatars1.githubusercontent.com/u/5917359?s=460&v=4" width="45px"></a>
-<a href="https://github.com/Gene1994">
-    <img src="https://avatars3.githubusercontent.com/u/24930369?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/spikesp">
-    <img src="https://avatars0.githubusercontent.com/u/12581996?s=460&v=4" width="45px"></a>
-<a href="https://github.com/illusorycloud">
-    <img src="https://avatars3.githubusercontent.com/u/31980412?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/kinglaw1204">
-    <img src="https://avatars1.githubusercontent.com/u/20039931?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/jun1st">
-    <img src="https://avatars2.githubusercontent.com/u/14312378?s=460&v=4" width="45px">
-</a>"
-<a href="https://github.com/fantasygg">  
-    <img src="https://avatars3.githubusercontent.com/u/13445354?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/debugjoker">  
-    <img src="https://avatars3.githubusercontent.com/u/26218005?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/zhyank">  
-    <img src="https://avatars0.githubusercontent.com/u/17696240?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/Goose9527">  
-    <img src="https://avatars2.githubusercontent.com/u/43314997?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/yuechuanx">  
-    <img src="https://avatars3.githubusercontent.com/u/19339293?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/cnLGMing">  
-    <img src="https://avatars2.githubusercontent.com/u/15910705?s=460&v=4" width="45px">
-</a>
-<a href="https://github.com/fanchenggang">  
-    <img src="https://avatars0.githubusercontent.com/u/20358122?s=460&v=4" width="45px">
-</a>
-
-## 公众号
-
-如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号。
-
-**《Java 面试突击》:** 由本文档衍生的专为面试而生的《Java 面试突击》V2.0 PDF 版本[公众号](#公众号)后台回复 **"Java 面试突击"** 即可免费领取！
-
-**Java 工程师必备学习资源:** 一些 Java 工程师常用学习资源公众号后台回复关键字 **“1”** 即可免费无套路获取。
-
-![我的公众号](https://cdn.jsdelivr.net/gh/javaguide-tech/blog-images/2020-08/167598cd2e17b8ec.png)
+ 
