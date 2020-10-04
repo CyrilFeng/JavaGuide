@@ -1,6 +1,4 @@
  
-## Java
-
 ### 基础
 
 **重要知识点详解：**
@@ -43,9 +41,7 @@
 
   **Java 8** ：[Java 8 新特性总结](docs/java/What's%20New%20in%20JDK8/Java8Tutorial.md)、[Java 8 学习资源推荐](docs/java/What's%20New%20in%20JDK8/Java8教程推荐.md)、[Java8 forEach 指南](docs/java/What's%20New%20in%20JDK8/Java8foreach指南.md)
   
-
-## 数据库
-
+ 
 ### MySQL
 
 **总结：**
@@ -67,13 +63,7 @@
 - [关于缓存的一些重要概念(Redis 前置菜)](docs/database/Redis/some-concepts-of-caching.md)
 - [Redis 常见问题总结](docs/database/Redis/redis-all.md)
 
-## 系统设计
-
-### 必知
-
-1. **[RestFul API 简明教程](docs/system-design/restful-api.md)**
-2. **[因为命名被 diss 无数次。Guide 简单聊聊编程最头疼的事情之一:命名](docs/system-design/naming.md)**
-
+ 
 ### 常用框架
 
 #### Spring/SpringBoot
@@ -88,11 +78,6 @@
 8. [Spring 中都用到了那些设计模式?](docs/system-design/framework/spring/Spring-Design-Patterns.md)
 
  
-#### Netty
-
-1. [剖析面试最常见问题之 Netty（上）](https://xiaozhuanlan.com/topic/4028536971)
-2. [剖析面试最常见问题之 Netty（下）](https://xiaozhuanlan.com/topic/3985146207)
-
  
 ### 分布式
 
