@@ -83,14 +83,11 @@
 
 - [Dubbo 总结：关于 Dubbo 的重要知识点](docs/system-design/data-communication/dubbo.md)
 - [服务之间的调用为啥不直接用 HTTP 而用 RPC？](docs/system-design/data-communication/why-use-rpc.md)
-
-#### 消息队列
-
- **[消息队列总结](docs/system-design/data-communication/message-queue.md)** 。
  
-
 [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
+
 [RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
+
 [ZooKeeper](docs/system-design/framework/zookeeper/zookeeper-plus.md) 
  
 
