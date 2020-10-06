@@ -1,10 +1,8 @@
  
 ### 基础
-
-**重要知识点详解：**
-2. [Java 常见关键字总结：final、static、this、super!](docs/java/basic/final,static,this,super.md)
-3. [什么是反射机制?反射机制的应用场景有哪些?](docs/java/basic/reflection.md)
-4. [代理模式详解：静态代理+JDK/CGLIB 动态代理实战（动态代理和静态代理的区别？JDK 动态代理 和 CGLIB 动态代理的区别？）](docs/java/basic/java-proxy.md)
+ 
+[什么是反射机制?反射机制的应用场景有哪些?](docs/java/basic/reflection.md)
+[代理模式详解：静态代理+JDK/CGLIB 动态代理实战（动态代理和静态代理的区别？JDK 动态代理 和 CGLIB 动态代理的区别？）](docs/java/basic/java-proxy.md)
 
 **其他：**
  [手把手教你定位常见 Java 性能问题](./docs/java/手把手教你定位常见Java性能问题.md)
@@ -92,7 +90,7 @@
 
 #### 消息队列
 
-消息队列在分布式系统中主要是为了解耦和削峰。相关阅读： **[消息队列总结](docs/system-design/data-communication/message-queue.md)** 。
+ **[消息队列总结](docs/system-design/data-communication/message-queue.md)** 。
 
 **RabbitMQ:**
 
