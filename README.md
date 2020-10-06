@@ -92,20 +92,15 @@
 1. [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
 2. [RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
  
-
-#### 分布式 id
-
-1. [为什么要分布式 id ？分布式 id 生成方案有哪些？](docs/system-design/micro-service/分布式id生成方案总结.md)
+ 
 
 #### 分布式限流
 
 1. [限流算法有哪些？](docs/system-design/micro-service/limit-request.md)
  
 #### ZooKeeper
-
-1. [【入门】ZooKeeper 相关概念总结 01](docs/system-design/framework/zookeeper/zookeeper-intro.md)
-2. [【进阶】ZooKeeper 相关概念总结 02](docs/system-design/framework/zookeeper/zookeeper-plus.md)
-3. [【实战】ZooKeeper 实战](docs/system-design/framework/zookeeper/zookeeper-in-action.md)
+ 
+[ZooKeeper 相关概念总结 02](docs/system-design/framework/zookeeper/zookeeper-plus.md) 
  
 
   
