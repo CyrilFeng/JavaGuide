@@ -1,11 +1,7 @@
  
-### 基础
- 
-[什么是反射机制?反射机制的应用场景有哪些?](docs/java/basic/reflection.md)
 [代理模式详解：静态代理+JDK/CGLIB 动态代理实战（动态代理和静态代理的区别？JDK 动态代理 和 CGLIB 动态代理的区别？）](docs/java/basic/java-proxy.md)
 
-**其他：**
- [手把手教你定位常见 Java 性能问题](./docs/java/手把手教你定位常见Java性能问题.md)
+[手把手教你定位常见 Java 性能问题](./docs/java/手把手教你定位常见Java性能问题.md)
 
 ### 容器
 
@@ -91,12 +87,7 @@
 #### 消息队列
 
  **[消息队列总结](docs/system-design/data-communication/message-queue.md)** 。
-
-**RabbitMQ:**
-
-1. [RabbitMQ 入门](docs/system-design/data-communication/rabbitmq.md)
-
-**RocketMQ:**
+ 
 
 1. [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
 2. [RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
