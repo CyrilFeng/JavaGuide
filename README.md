@@ -89,18 +89,9 @@
  **[消息队列总结](docs/system-design/data-communication/message-queue.md)** 。
  
 
-1. [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
-2. [RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
- 
- 
-
-#### 分布式限流
-
-1. [限流算法有哪些？](docs/system-design/micro-service/limit-request.md)
- 
-#### ZooKeeper
- 
-[ZooKeeper 相关概念总结 02](docs/system-design/framework/zookeeper/zookeeper-plus.md) 
+[RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
+[RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
+[ZooKeeper](docs/system-design/framework/zookeeper/zookeeper-plus.md) 
  
 
   
