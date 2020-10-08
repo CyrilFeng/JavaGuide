@@ -1,5 +1,4 @@
  
-[代理模式详解：静态代理+JDK/CGLIB 动态代理实战（动态代理和静态代理的区别？JDK 动态代理 和 CGLIB 动态代理的区别？）](docs/java/basic/java-proxy.md)
 
 [手把手教你定位常见 Java 性能问题](./docs/java/手把手教你定位常见Java性能问题.md)
 
