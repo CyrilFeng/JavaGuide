@@ -84,7 +84,4 @@
 - [服务之间的调用为啥不直接用 HTTP 而用 RPC？](docs/system-design/data-communication/why-use-rpc.md)
  
 [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
-
-[RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
  
-  
