@@ -87,8 +87,5 @@
 [RocketMQ 入门](docs/system-design/data-communication/RocketMQ.md)
 
 [RocketMQ 的几个简单问题与答案](docs/system-design/data-communication/RocketMQ-Questions.md)
-
-[ZooKeeper](docs/system-design/framework/zookeeper/zookeeper-plus.md) 
  
-
   
