@@ -1,17 +1,3 @@
-对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用**Cglib** ，这时候Spring AOP会使用 **Cglib** 生成一个被代理对象的子类来作为代理，如下图所示：
-
-![SpringAOPProcess](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/SpringAOPProcess.jpg)
-
-
-### 4.2 Spring AOP 和 AspectJ AOP 有什么区别？
-
-**Spring AOP 属于运行时增强，而 AspectJ 是编译时增强。** Spring AOP 基于代理(Proxying)，而 AspectJ 基于字节码操作(Bytecode Manipulation)。
-
-AspectJ  相比于 Spring AOP 功能更加强大，但是 Spring AOP 相对来说更简单，
-
-但是，当切面太多的话，最好选择 AspectJ ，它比Spring AOP 快很多。
-
-## 5. Spring bean
 
 ### 5.1 Spring 中的 bean 的作用域有哪些?
 
@@ -19,17 +5,6 @@ AspectJ  相比于 Spring AOP 功能更加强大，但是 Spring AOP 相对来�
 - prototype : 每次请求都会创建一个新的 bean 实例。
 - request : 每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP request内有效。
 - session : 每一次HTTP请求都会产生一个新的 bean，该bean仅在当前 HTTP session 内有效。
-
-### 5.2 Spring 中的单例 bean 的线程安全问题了解吗？
-
-大部分时候我们并没有在系统中使用多线程，所以很少有人会关注这个问题。单例 bean 存在线程问题，主要是因为当多个线程操作同一个对象的时候，对这个对象的非静态成员变量的写操作会存在线程安全问题。
-
-常见的有两种解决办法：
-
-1. 在Bean对象中尽量避免定义可变的成员变量（不太现实）。
-
-2. 在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在 ThreadLocal 中（推荐的一种方式）。
-
 
 ### 5.3 @Component 和 @Bean 的区别是什么？
 
@@ -96,17 +71,7 @@ AspectJ  相比于 Spring AOP 功能更加强大，但是 Spring AOP 相对来�
 - **适配器模式** :Spring AOP 的增强或通知(Advice)使用到了适配器模式、spring MVC 中也是用到了适配器模式适配`Controller`。
 - ......
 
-## 8. Spring 事务
-
-### 8.1 Spring 管理事务的方式有几种？
-
-1. 编程式事务，在代码中硬编码。(不推荐使用)
-2. 声明式事务，在配置文件中配置（推荐使用）
-
-**声明式事务又分为两种：**
-
-1. 基于XML的声明式事务
-2. 基于注解的声明式事务
+  
 
 ### 8.2 Spring 事务中的隔离级别有哪几种?
 
