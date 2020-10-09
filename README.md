@@ -50,10 +50,9 @@
  
 ### 常用框架
 
-#### Spring/SpringBoot
+#### Spring 
 
 1. **[Spring 常见问题总结](docs/system-design/framework/spring/SpringInterviewQuestions.md)**
-2. **[SpringBoot 指南/常见面试题总结](https://github.com/Snailclimb/springboot-guide)**
 3. **[Spring/Spring 常用注解总结！安排！](./docs/system-design/framework/spring/spring-annotations.md)**
 4. **[Spring 事务总结](docs/system-design/framework/spring/spring-transaction.md)**
 5. [Spring IoC 和 AOP 详解](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247486938&idx=1&sn=c99ef0233f39a5ffc1b98c81e02dfcd4&chksm=cea24211f9d5cb07fa901183ba4d96187820713a72387788408040822ffb2ed575d28e953ce7&token=1666190828&lang=zh_CN#rd)
