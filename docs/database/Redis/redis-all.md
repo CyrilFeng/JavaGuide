@@ -1,65 +1,11 @@
  
 
- 
-![](images/redis-all/redis事件处理器.png)
-
- 
- 
-![redis4.0 more thread](images/redis-all/redis4.0-more-thread.png)
-
-不过，Redis 4.0 增加的多线程主要是针对一些大键值对的删除操作的命令，使用这些命令就会使用主处理之外的其他线程来“异步处理”。
-
- 
- 
-
-### 9. Redis6.0 之后为何引入了多线程？
-
 **Redis6.0 引入多线程主要是为了提高网络 IO 读写性能**，因为这个算是 Redis 中的一个性能瓶颈（Redis 的瓶颈主要受限于内存和网络）。
 
 虽然，Redis6.0 引入了多线程，但是 Redis 的多线程只是在网络数据的读写这类耗时操作上使用了， 执行命令仍然是单线程顺序执行。因此，你也不需要担心线程安全问题。
-
-Redis6.0 的多线程默认是禁用的，只使用主线程。如需开启需要修改 redis 配置文件 `redis.conf` ：
-
-``` bash
-io-threads-do-reads yes
-```
-
-开启多线程后，还需要设置线程数，否则是不生效的。同样需要修改 redis 配置文件 `redis.conf` :
-
-``` bash
-io-threads 4 #官网建议4核的机器建议设置为2或3个线程，8核的建议设置为6个线程
-```
-
-推荐阅读：
-
-1. [Redis 6.0 新特性-多线程连环 13 问！](https://mp.weixin.qq.com/s/FZu3acwK6zrCBZQ_3HoUgw)
-2. [为什么 Redis 选择单线程模型](https://draveness.me/whys-the-design-redis-single-thread/)
-
-### 10. Redis 给缓存数据设置过期时间有啥用？
-
-一般情况下，我们设置保存的缓存数据的时候都会设置一个过期时间。为什么呢？
-
-因为内存是有限的，如果缓存中的所有数据都是一直保存的话，分分钟直接Out of memory。
-
-Redis 自带了给缓存数据设置过期时间的功能，比如：
-
-``` bash
-127.0.0.1:6379> exp key  60 # 数据在 60s 后过期
-(integer) 1
-127.0.0.1:6379> setex key 60 value # 数据在 60s 后过期 (setex:[set] + [ex]pire)
-OK
-127.0.0.1:6379> ttl key # 查看数据还有多久过期
-(integer) 56
-```
-
-注意：**Redis中除了字符串类型有自己独有设置过期时间的命令 `setex` 外，其他方法都需要依靠 `expire` 命令来设置过期时间 。另外， `persist` 命令可以移除一个键的过期时间： **
-
-**过期时间除了有助于缓解内存的消耗，还有什么其他用么？**
-
-很多时候，我们的业务场景就是需要某个数据只在某一时间段内存在，比如我们的短信验证码可能只在1分钟内有效，用户登录的 token 可能只在 1 天内有效。
-
-如果使用传统的数据库来处理的话，一般都是自己判断过期，这样更麻烦并且性能要差很多。
-
+ 
+ 
+ 
 ### 11. Redis是如何判断数据是否过期的呢？
 
 Redis 通过一个叫做过期字典（可以看作是hash表）来保存数据过期的时间。过期字典的键指向Redis数据库中的某个key(键)，过期字典的值是一个long long类型的整数，这个整数保存了key所指向的数据库键的过期时间（毫秒精度的UNIX时间戳）。 
@@ -105,9 +51,6 @@ Redis 提供 6 种数据淘汰策略：
 4. **allkeys-lru（least recently used）**：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）
 5. **allkeys-random**：从数据集（server.db[i].dict）中任意选择数据淘汰
 6. **no-eviction**：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！
-
-4.0 版本后增加以下两种：
-
 7. **volatile-lfu（least frequently used）**：从已设置过期时间的数据集(server.db[i].expires)中挑选最不经常使用的数据淘汰
 8. **allkeys-lfu（least frequently used）**：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key
 
