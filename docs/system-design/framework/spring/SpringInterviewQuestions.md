@@ -1,5 +1,4 @@
-这篇文章主要是想通过一些问题，加深大家对于 Spring 的理解，所以不会涉及太多的代码！这篇文章整理了挺长时间，下面的很多问题我自己在使用 Spring 的过程中也并没有注意，自己也是临时查阅了很多资料和书籍补上的。网上也有一些很多关于 Spring 常见问题/面试题整理的文章，我感觉大部分都是互相 copy，而且很多问题也不是很好，有些回答也存在问题。所以，自己花了一周的业余时间整理了一下，希望对大家有帮助。
-
+ 
 ## 1. 什么是 Spring 框架?
 
 Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。Spring 官网：<https://spring.io/>。
@@ -296,63 +295,4 @@ MVC 是一种设计模式,Spring MVC 是一款很优秀的 MVC 框架。Spring M
 关于 `@Transactional ` 注解推荐阅读的文章：
 
 - [透彻的掌握 Spring 中@transactional 的使用](https://www.ibm.com/developerworks/cn/java/j-master-spring-transactional-use/index.html)
-
-## 9. JPA
-
-### 9.1 如何使用JPA在数据库中非持久化一个字段？
-
-假如我们有有下面一个类：
-
-```java
-Entity(name="USER")
-public class User {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private Long id;
-    
-    @Column(name="USER_NAME")
-    private String userName;
-    
-    @Column(name="PASSWORD")
-    private String password;
-  
-    private String secrect;
-  
-}
-```
-
-如果我们想让`secrect` 这个字段不被持久化，也就是不被数据库存储怎么办？我们可以采用下面几种方法：
-
-```java
-static String transient1; // not persistent because of static
-final String transient2 = “Satish”; // not persistent because of final
-transient String transient3; // not persistent because of transient
-@Transient
-String transient4; // not persistent because of @Transient
-```
-
-一般使用后面两种方式比较多，我个人使用注解的方式比较多。
-
-
-## 参考
-
-- 《Spring 技术内幕》
-- <http://www.cnblogs.com/wmyskxz/p/8820371.html>
-- <https://www.journaldev.com/2696/spring-interview-questions-and-answers>
-- <https://www.edureka.co/blog/interview-questions/spring-interview-questions/>
-- https://www.cnblogs.com/clwydjgs/p/9317849.html
-- <https://howtodoinjava.com/interview-questions/top-spring-interview-questions-with-answers/>
-- <http://www.tomaszezula.com/2014/02/09/spring-series-part-5-component-vs-bean/>
-- <https://stackoverflow.com/questions/34172888/difference-between-bean-and-autowired>
-
-## 公众号
-
-如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号。
-
-**《Java面试突击》:** 由本文档衍生的专为面试而生的《Java面试突击》V2.0 PDF 版本[公众号](#公众号)后台回复 **"Java面试突击"** 即可免费领取！
-
-**Java工程师必备学习资源:** 一些Java工程师常用学习资源公众号后台回复关键字 **“1”** 即可免费无套路获取。 
-
-![公众号](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/javaguide1.jpg)
+ 
