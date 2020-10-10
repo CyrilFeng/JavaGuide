@@ -1,51 +1,11 @@
-  
- **新生代采用复制算法，老年代采用标记-整理算法。**
-![ Serial 收集器 ](./pictures/jvm垃圾回收/46873026.png)
+ 
 
-虚拟机的设计者们当然知道 Stop The World 带来的不良用户体验，所以在后续的垃圾收集器设计中停顿时间在不断缩短（仍然还有停顿，寻找最优秀的垃圾收集器的过程仍然在继续）。
-
-但是 Serial 收集器有没有优于其他垃圾收集器的地方呢？当然有，它**简单而高效（与其他收集器的单线程相比）**。Serial 收集器由于没有线程交互的开销，自然可以获得很高的单线程收集效率。Serial 收集器对于运行在 Client 模式下的虚拟机来说是个不错的选择。
-
-### 4.2 ParNew 收集器
-**ParNew 收集器其实就是 Serial 收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）和 Serial 收集器完全一样。**
-
- **新生代采用复制算法，老年代采用标记-整理算法。**
-![ParNew 收集器 ](./pictures/jvm垃圾回收/22018368.png)
-
-它是许多运行在 Server 模式下的虚拟机的首要选择，除了 Serial 收集器外，只有它能与 CMS 收集器（真正意义上的并发收集器，后面会介绍到）配合工作。
-
-**并行和并发概念补充：**
-
-- **并行（Parallel）** ：指多条垃圾收集线程并行工作，但此时用户线程仍然处于等待状态。
-
-- **并发（Concurrent）**：指用户线程与垃圾收集线程同时执行（但不一定是并行，可能会交替执行），用户程序在继续运行，而垃圾收集器运行在另一个 CPU 上。
-
-
-### 4.3 Parallel Scavenge 收集器
-
-Parallel Scavenge 收集器也是使用复制算法的多线程收集器，它看上去几乎和ParNew都一样。 **那么它有什么特别之处呢？**
-
-```
--XX:+UseParallelGC 
-
-    使用 Parallel 收集器+ 老年代串行
-
--XX:+UseParallelOldGC
-
-    使用 Parallel 收集器+ 老年代并行
-
-```
-
-**Parallel Scavenge 收集器关注点是吞吐量（高效率的利用 CPU）。CMS 等垃圾收集器的关注点更多的是用户线程的停顿时间（提高用户体验）。所谓吞吐量就是 CPU 中用于运行用户代码的时间与 CPU 总消耗时间的比值。** Parallel Scavenge 收集器提供了很多参数供用户找到最合适的停顿时间或最大吞吐量，如果对于收集器运作不太了解的话，手工优化存在困难的话可以选择把内存管理优化交给虚拟机去完成也是一个不错的选择。
+ Parallel Scavenge 收集器关注点是吞吐量（高效率的利用 CPU）。 
 
  **新生代采用复制算法，老年代采用标记-整理算法。**
 ![Parallel Scavenge 收集器 ](./pictures/jvm垃圾回收/parllel-scavenge收集器.png)
-
-**是JDK1.8默认收集器**  
- 使用java -XX:+PrintCommandLineFlags -version命令查看
-
  
-JDK1.8默认使用的是Parallel Scavenge + Parallel Old，如果指定了-XX:+UseParallelGC参数，则默认指定了-XX:+UseParallelOldGC，可以使用-XX:-UseParallelOldGC来禁用该功能
+JDK1.8默认使用的是Parallel Scavenge + Parallel Old 
 
 ### 4.4.Serial Old 收集器
 **Serial 收集器的老年代版本**，它同样是一个单线程收集器。它主要有两大用途：一种用途是在 JDK1.5 以及以前的版本中与 Parallel Scavenge 收集器搭配使用，另一种用途是作为 CMS 收集器的后备方案。
