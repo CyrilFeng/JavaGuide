@@ -1,194 +1,15 @@
  
-   
-
-![](./pictures/jvm垃圾回收/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.png)
+![](./pictures/jvm垃圾回收/11034259.png)
+ 
 
  
-大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加  1  
-
-> 修正（[issue552](https://github.com/Snailclimb/JavaGuide/issues/552)）：“Hotspot遍历所有对象时，按照年龄从小到大对其所占用的大小进行累积，当累积的某个年龄大小超过了survivor区的一半时，取这个年龄和MaxTenuringThreshold中更小的一个值，作为新的晋升年龄阈值”。
->
-> **动态年龄计算的代码如下**
->
-> ```c++
-> uint ageTable::compute_tenuring_threshold(size_t survivor_capacity) {
-> 	//survivor_capacity是survivor空间的大小
-> size_t desired_survivor_size = (size_t)((((double) survivor_capacity)*TargetSurvivorRatio)/100);
-> size_t total = 0;
-> uint age = 1;
-> while (age < table_size) {
->  total += sizes[age];//sizes数组是每个年龄段对象大小
->  if (total > desired_survivor_size) break;
->  age++;
-> }
-> uint result = age < MaxTenuringThreshold ? age : MaxTenuringThreshold;
-> 	...
-> }
-> 
-> ```
->
-> 
-
-经过这次GC后，Eden区和"From"区已经被清空。这个时候，"From"和"To"会交换他们的角色，也就是新的"To"就是上次GC前的“From”，新的"From"就是上次GC前的"To"。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，"To"区被填满之后，会将所有对象移动到老年代中。
-
-![堆内存常见分配策略 ](./pictures/jvm垃圾回收/堆内存.png)
-
-### 1.1 对象优先在 eden 区分配
-
-目前主流的垃圾收集器都会采用分代回收算法，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。
-
-大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.下面我们来进行实际测试以下。
-
-**测试：**
-
-```java
-public class GCTest {
-
-	public static void main(String[] args) {
-		byte[] allocation1, allocation2;
-		allocation1 = new byte[30900*1024];
-		//allocation2 = new byte[900*1024];
-	}
-}
-```
-通过以下方式运行：
-![](./pictures/jvm垃圾回收/25178350.png)
-
-添加的参数：`-XX:+PrintGCDetails`
-![](./pictures/jvm垃圾回收/10317146.png)
-
-运行结果 (红色字体描述有误，应该是对应于 JDK1.7 的永久代)：
-
-![](http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-26/28954286.jpg)
-
-从上图我们可以看出 eden 区内存几乎已经被分配完全（即使程序什么也不做，新生代也会使用 2000 多 k 内存）。假如我们再为 allocation2 分配内存会出现什么情况呢？
-
-```java
-allocation2 = new byte[900*1024];
-```
-![](http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-26/28128785.jpg)
-
-**简单解释一下为什么会出现这种情况：** 因为给 allocation2 分配内存的时候 eden 区内存几乎已经被分配完了，我们刚刚讲了当 Eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.GC 期间虚拟机又发现 allocation1 无法存入 Survivor 空间，所以只好通过 **分配担保机制** 把新生代的对象提前转移到老年代中去，老年代上的空间足够存放 allocation1，所以不会出现 Full GC。执行 Minor GC 后，后面分配的对象如果能够存在 eden 区的话，还是会在 eden 区分配内存。可以执行如下代码验证：
-
-```java
-public class GCTest {
-
-	public static void main(String[] args) {
-		byte[] allocation1, allocation2,allocation3,allocation4,allocation5;
-		allocation1 = new byte[32000*1024];
-		allocation2 = new byte[1000*1024];
-		allocation3 = new byte[1000*1024];
-		allocation4 = new byte[1000*1024];
-		allocation5 = new byte[1000*1024];
-	}
-}
-
-```
-
-
-### 1.2 大对象直接进入老年代
-大对象就是需要大量连续内存空间的对象（比如：字符串、数组）。
-
-**为什么要这样呢？**
-
-为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。
-
-### 1.3 长期存活的对象将进入老年代
-既然虚拟机采用了分代收集的思想来管理内存，那么内存回收时就必须能识别哪些对象应放在新生代，哪些对象应放在老年代中。为了做到这一点，虚拟机给每个对象一个对象年龄（Age）计数器。
-
-如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置。
-
-### 1.4 动态对象年龄判定
-
-
-大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加  1(Eden 区->Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置。
-
-> 修正（[issue552](https://github.com/Snailclimb/JavaGuide/issues/552)）：“Hotspot遍历所有对象时，按照年龄从小到大对其所占用的大小进行累积，当累积的某个年龄大小超过了survivor区的一半时，取这个年龄和MaxTenuringThreshold中更小的一个值，作为新的晋升年龄阈值”。
->
-> **动态年龄计算的代码如下**
->
-> ```c++
-> uint ageTable::compute_tenuring_threshold(size_t survivor_capacity) {
-> 	//survivor_capacity是survivor空间的大小
-> size_t desired_survivor_size = (size_t)((((double) survivor_capacity)*TargetSurvivorRatio)/100);
-> size_t total = 0;
-> uint age = 1;
-> while (age < table_size) {
->  total += sizes[age];//sizes数组是每个年龄段对象大小
->  if (total > desired_survivor_size) break;
->  age++;
-> }
-> uint result = age < MaxTenuringThreshold ? age : MaxTenuringThreshold;
-> 	...
-> }
-> 
-> ```
->
-> 额外补充说明([issue672](https://github.com/Snailclimb/JavaGuide/issues/672))：**关于默认的晋升年龄是15，这个说法的来源大部分都是《深入理解Java虚拟机》这本书。**
-> 如果你去Oracle的官网阅读[相关的虚拟机参数](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html)，你会发现`-XX:MaxTenuringThreshold=threshold`这里有个说明
->
-> **Sets the maximum tenuring threshold for use in adaptive GC sizing. The largest value is 15. The default value is 15 for the parallel (throughput) collector, and 6 for the CMS collector.默认晋升年龄并不都是15，这个是要区分垃圾收集器的，CMS就是6.**
-
-### 1.5主要进行 gc 的区域 
-
-周志明先生在《深入理解Java虚拟机》第二版中P92如是写道：
-
-> ~~*“老年代GC（Major GC/Full GC），指发生在老年代的GC……”*~~
-
-上面的说法已经在《深入理解Java虚拟机》第三版中被改正过来了。感谢R大的回答：
-
-![](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2020-8/b48228c2-ac00-4668-a78f-6f221f8563b5.png)
-
-**总结：**
-
-针对HotSpot VM的实现，它里面的GC其实准确分类只有两大种：
-
-部分收集 (Partial GC)：
-
-- 新生代收集（Minor GC / Young GC）：只对新生代进行垃圾收集；
-- 老年代收集（Major GC / Old GC）：只对老年代进行垃圾收集。需要注意的是 Major GC 在有的语境中也用于指代整堆收集；
-- 混合收集（Mixed GC）：对整个新生代和部分老年代进行垃圾收集。
-
-整堆收集 (Full GC)：收集整个 Java 堆和方法区。
-
-## 2 对象已经死亡？
-
-堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断那些对象已经死亡（即不能再被任何途径使用的对象）。
-
-![](./pictures/jvm垃圾回收/11034259.png)
-
-### 2.1 引用计数法
-
-给对象中添加一个引用计数器，每当有一个地方引用它，计数器就加 1；当引用失效，计数器就减 1；任何时候计数器为 0 的对象就是不可能再被使用的。
-
-**这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题。** 所谓对象之间的相互引用问题，如下面代码所示：除了对象 objA 和 objB 相互引用着对方之外，这两个对象之间再无任何引用。但是他们因为互相引用对方，导致它们的引用计数器都不为 0，于是引用计数算法无法通知 GC 回收器回收他们。
-
-```java
-public class ReferenceCountingGc {
-    Object instance = null;
-	public static void main(String[] args) {
-		ReferenceCountingGc objA = new ReferenceCountingGc();
-		ReferenceCountingGc objB = new ReferenceCountingGc();
-		objA.instance = objB;
-		objB.instance = objA;
-		objA = null;
-		objB = null;
-
-	}
-}
-```
-
-
-
-### 2.2 可达性分析算法
 
 这个算法的基本思想就是通过一系列的称为 **“GC Roots”** 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。
 
 ![可达性分析算法 ](./pictures/jvm垃圾回收/72762049.png)
 
-可作为GC Roots的对象包括下面几种:
-* 虚拟机栈(栈帧中的本地变量表)中引用的对象
-* 本地方法栈(Native方法)中引用的对象
+ 
+  
 * 方法区中类静态属性引用的对象
 * 方法区中常量引用的对象
 
@@ -380,50 +201,13 @@ JDK1.8默认使用的是Parallel Scavenge + Parallel Old，如果指定了-XX:+U
 
 ### 4.7 G1 收集器
 
-
-**G1 (Garbage-First) 是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足 GC 停顿时间要求的同时,还具备高吞吐量性能特征.**
-
-被视为 JDK1.7 中 HotSpot 虚拟机的一个重要进化特征。它具备一下特点：
+ 
 
 - **并行与并发**：G1 能充分利用 CPU、多核环境下的硬件优势，使用多个 CPU（CPU 或者 CPU 核心）来缩短 Stop-The-World 停顿时间。部分其他收集器原本需要停顿 Java 线程执行的 GC 动作，G1 收集器仍然可以通过并发的方式让 java 程序继续执行。
 - **分代收集**：虽然 G1 可以不需要其他收集器配合就能独立管理整个 GC 堆，但是还是保留了分代的概念。
 - **空间整合**：与 CMS 的“标记--清理”算法不同，G1 从整体来看是基于“标记整理”算法实现的收集器；从局部上来看是基于“复制”算法实现的。
 - **可预测的停顿**：这是 G1 相对于 CMS 的另一个大优势，降低停顿时间是 G1 和 CMS 共同的关注点，但 G1 除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为 M 毫秒的时间片段内。
-
-
-G1 收集器的运作大致分为以下几个步骤：
-
-- **初始标记**
-- **并发标记**
-- **最终标记**
-- **筛选回收**
-
+ 
 
 **G1 收集器在后台维护了一个优先列表，每次根据允许的收集时间，优先选择回收价值最大的 Region(这也就是它的名字 Garbage-First 的由来)**。这种使用 Region 划分内存空间以及有优先级的区域回收方式，保证了 G1 收集器在有限时间内可以尽可能高的收集效率（把内存化整为零）。
-
-## 参考
-
-- 《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第二版》
-- https://my.oschina.net/hosee/blog/644618
-- <https://docs.oracle.com/javase/specs/jvms/se8/html/index.html>
-
-## 公众号
-
-如果大家想要实时关注我更新的文章以及分享的干货的话，可以关注我的公众号。
-
-**《Java面试突击》:** 由本文档衍生的专为面试而生的《Java面试突击》V2.0 PDF 版本[公众号](#公众号)后台回复 **"Java面试突击"** 即可免费领取！
-
-**Java工程师必备学习资源:** 一些Java工程师常用学习资源[公众号](#公众号)后台回复关键字 **“1”** 即可免费无套路获取。 
-
-![我的公众号](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/167598cd2e17b8ec.png)
-
-
-
-
-
-
-
-
-
-
-
+ 
