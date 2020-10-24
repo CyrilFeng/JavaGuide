@@ -10,7 +10,6 @@
 
 1. [并发容器总结](docs/java/Multithread/并发容器总结.md)
 3. [乐观锁与悲观锁](docs/essential-content-for-interview/面试必备之乐观锁与悲观锁.md)
-4. [万字图文深度解析 ThreadLocal](docs/java/Multithread/ThreadLocal.md)
 5. [JUC 中的 Atomic 原子类总结](docs/java/Multithread/Atomic.md)
 6. [AQS 原理以及 AQS 同步组件总结](docs/java/Multithread/AQS.md)
 
