@@ -31,19 +31,17 @@
  
 ### MySQL
 
-**总结：**
+ 
 
 1. **[【推荐】MySQL/数据库 知识点总结](docs/database/MySQL.md)**
 2. **[阿里巴巴开发手册数据库部分的一些最佳实践](docs/database/阿里巴巴开发手册数据库部分的一些最佳实践.md)**
 3. **[一千行 MySQL 学习笔记](docs/database/一千行MySQL命令.md)**
 4. [MySQL 高性能优化规范建议](docs/database/MySQL高性能优化规范建议.md)
 
-**重要知识点：**
+ 
 
 1. [数据库索引总结 1](docs/database/MySQL%20Index.md)
 [数据库索引总结 2](docs/database/数据库索引.md)
 2. [事务隔离级别(图文详解)](<docs/database/事务隔离级别(图文详解).md>)
 3. [一条 SQL 语句在 MySQL 中如何执行的](docs/database/一条sql语句在mysql中如何执行的.md)
-  
-    
-[Dubbo 总结：关于 Dubbo 的重要知识点](docs/system-design/data-communication/dubbo.md)
+   
