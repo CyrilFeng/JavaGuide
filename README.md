@@ -43,5 +43,4 @@
 1. [数据库索引总结 1](docs/database/MySQL%20Index.md)
 [数据库索引总结 2](docs/database/数据库索引.md)
 2. [事务隔离级别(图文详解)](<docs/database/事务隔离级别(图文详解).md>)
-3. [一条 SQL 语句在 MySQL 中如何执行的](docs/database/一条sql语句在mysql中如何执行的.md)
-   
+    
